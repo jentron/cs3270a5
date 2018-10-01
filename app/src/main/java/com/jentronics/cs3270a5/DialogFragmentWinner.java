@@ -16,17 +16,15 @@ import android.util.Log;
  * A simple {@link Fragment} subclass.
  */
 public class DialogFragmentWinner extends DialogFragment {
-    onDialogFragWinner mCallback;
+    DialogFragmentInterface mCallback;
 
-    public interface onDialogFragWinner {
-        void onWin();
-    }
+
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
 
         try{
-            mCallback = (onDialogFragWinner) activity;
+            mCallback = (DialogFragmentInterface) activity;
         }
         catch (ClassCastException e){
             throw new ClassCastException(getString(R.string.err_actionsfrag));

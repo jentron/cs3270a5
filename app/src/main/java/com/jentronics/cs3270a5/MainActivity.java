@@ -1,6 +1,5 @@
 package com.jentronics.cs3270a5;
 
-import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,8 +7,6 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 import android.widget.Toast;
 
 import java.math.BigDecimal;
@@ -19,7 +16,7 @@ public class MainActivity extends AppCompatActivity
         implements ChangeActionsFragment.OnActionClicked,
         ChangeResultsFragment.OnChangeResult,
         ChangeButtonsFragment.OnButtonsFragment,
-        DialogFragmentWinner.onDialogFragWinner
+        DialogFragmentInterface
 {
     private FragmentManager fm;
     private ChangeActionsFragment actionsFragment;
@@ -40,26 +37,6 @@ public class MainActivity extends AppCompatActivity
                 .replace(R.id.fragment_change_buttons,new ChangeButtonsFragment(), "FragButtons")
                 .replace(R.id.fragment_change_result, new ChangeResultsFragment(), "FragResults")
                 .commit();
-
-
-        Button btnShowFail = (Button) findViewById(R.id.btn_show_fail);
-        btnShowFail.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                DialogFragmentIncorrectChange dialog = new DialogFragmentIncorrectChange();
-                dialog.setCancelable(false);
-                dialog.show(getSupportFragmentManager(), "failDialog");
-            }
-        });
-        Button btnShowWinner = (Button) findViewById(R.id.btn_show_win);
-        btnShowWinner.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                DialogFragmentWinner dialog = new DialogFragmentWinner();
-                dialog.setCancelable(false);
-                dialog.show(getSupportFragmentManager(), "winDialog");
-            }
-        });
 
     }
 
@@ -106,16 +83,17 @@ public class MainActivity extends AppCompatActivity
 
     public void startNewGame(){
         // start another game
+        resultsFragment.stopGameTimer();
         actionsFragment.updateCorrectCount();
         actionsFragment.createNewAmount();
         resultsFragment.clearChange();
-        resultsFragment.setTimeRemaining();
+        resultsFragment.startGameTimer();
     }
 
     @Override
     public void onReStart() {
         resultsFragment.clearChange();
-        resultsFragment.setTimeRemaining();
+        resultsFragment.startGameTimer();
     }
 
     @Override
@@ -135,10 +113,15 @@ public class MainActivity extends AppCompatActivity
         int res = resultsFragment.addChange(amount);
         if(res > 0 ) {
             Log.d("ResultsFrag", "Too Big");
+            resultsFragment.stopGameTimer();
+            DialogFragmentIncorrectChange dialog = new DialogFragmentIncorrectChange();
+            dialog.setCancelable(false);
+            dialog.show(getSupportFragmentManager(), "failDialog");
         } else if (res < 0 ) {
             Log.d("ResultsFrag", "Too Small");
         } else {
             Log.d("ResultsFrag", "Perfect");
+            resultsFragment.stopGameTimer();
             DialogFragmentWinner dialog = new DialogFragmentWinner();
             dialog.setCancelable(false);
             dialog.show(getSupportFragmentManager(), "winDialog");
@@ -148,6 +131,11 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onWin() {
+        startNewGame();
+    }
+
+    @Override
+    public void onLose() {
         startNewGame();
     }
 }

@@ -30,6 +30,18 @@ public class ChangeResultsFragment extends Fragment {
     private BigDecimal changeToMake = BigDecimal.ZERO;
     private BigDecimal changeSoFar  = BigDecimal.ZERO;
 
+    private CountDownTimer gameTimer = new CountDownTimer( 30000, 1000) {
+        public void onTick(long millisUntilFinished) {
+            String timeRemaining = Integer.toString((int) millisUntilFinished/1000);
+            if(tv_timeRemain != null) tv_timeRemain.setText(timeRemaining);
+        }
+        public void onFinish() {
+            String timeRemaining = Integer.toString(0);
+            if(tv_timeRemain != null) tv_timeRemain.setText(timeRemaining);
+            mCallback.onTimeOut();
+        }
+    };
+
     interface OnChangeResult {
         void onTimeOut();
     }
@@ -76,18 +88,12 @@ public class ChangeResultsFragment extends Fragment {
         return changeSoFar.compareTo(changeToMake); /* -1 less than, 0 equal, 1 over */
     }
 
-    public void setTimeRemaining(){
-        new CountDownTimer( 30000, 1000) {
-            public void onTick(long millisUntilFinished) {
-                String timeRemaining = Integer.toString((int) millisUntilFinished/1000);
-                if(tv_timeRemain != null) tv_timeRemain.setText(timeRemaining);
-            }
-            public void onFinish() {
-                String timeRemaining = Integer.toString(0);
-                if(tv_timeRemain != null) tv_timeRemain.setText(timeRemaining);
-                mCallback.onTimeOut();
-            }
-        }.start();
+    public void startGameTimer(){
+        gameTimer.start();
+    }
+
+    public void stopGameTimer(){
+        gameTimer.cancel();
     }
 
     public void setChangeToMake(BigDecimal change) {
