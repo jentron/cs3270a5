@@ -74,9 +74,7 @@ public class ChangeActionsFragment extends Fragment {
         btnNewAmount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int cents = random.nextInt(maxChangeCents);
-                double newAmount = (double) cents/100.0;
-                mCallback.onNewAmount(newAmount);
+                createNewAmount();
                 Log.d("Buttons", "clicked btn_NewAmount");
             }
         });
@@ -89,5 +87,11 @@ public class ChangeActionsFragment extends Fragment {
     public void updateCorrectCount(int newCount) {
         correct = newCount;
         tv_correct.setText(Integer.toString(correct));
+    }
+
+    public void createNewAmount() {
+        int cents = random.nextInt(maxChangeCents);
+        double newAmount = (double) cents/100.0;
+        mCallback.onNewAmount(newAmount);
     }
 }

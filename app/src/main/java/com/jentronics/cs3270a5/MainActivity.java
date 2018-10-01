@@ -94,6 +94,8 @@ public class MainActivity extends AppCompatActivity implements ChangeActionsFrag
         actionsFragment = (ChangeActionsFragment) fm.findFragmentByTag("FragActions");
         buttonsFragment = (ChangeButtonsFragment) fm.findFragmentByTag("FragButtons");
         resultsFragment = (ChangeResultsFragment) fm.findFragmentByTag("FragResults");
+
+        actionsFragment.createNewAmount(); // FIXME: Persist
     }
 
     private void action_set_max() {
