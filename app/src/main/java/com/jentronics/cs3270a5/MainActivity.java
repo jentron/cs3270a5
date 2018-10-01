@@ -13,7 +13,8 @@ import android.widget.Toast;
 import java.math.BigDecimal;
 
 
-public class MainActivity extends AppCompatActivity implements ChangeActionsFragment.OnActionClicked {
+public class MainActivity extends AppCompatActivity
+        implements ChangeActionsFragment.OnActionClicked, ChangeResultsFragment.OnChangeResult {
     private FragmentManager fm;
     private ChangeActionsFragment actionsFragment;
     private ChangeButtonsFragment buttonsFragment;
@@ -39,9 +40,7 @@ public class MainActivity extends AppCompatActivity implements ChangeActionsFrag
         btnShowTimeOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DialogFragmentTimeOut dialog = new DialogFragmentTimeOut();
-                dialog.setCancelable(false);
-                dialog.show(getSupportFragmentManager(), "timeoutDialog");
+
             }
         });
         Button btnShowFail = (Button) findViewById(R.id.btn_show_fail);
@@ -109,11 +108,19 @@ public class MainActivity extends AppCompatActivity implements ChangeActionsFrag
     @Override
     public void onReStart() {
         resultsFragment.clearChange();
+        resultsFragment.setTimeRemaining();
         // todo reset the timer
     }
 
     @Override
     public void onNewAmount(double newAmount) {
         resultsFragment.setChangeToMake(new BigDecimal(newAmount));
+    }
+
+    @Override
+    public void onTimeOut() {
+        DialogFragmentTimeOut dialog = new DialogFragmentTimeOut();
+        dialog.setCancelable(false);
+        dialog.show(getSupportFragmentManager(), "timeoutDialog");
     }
 }

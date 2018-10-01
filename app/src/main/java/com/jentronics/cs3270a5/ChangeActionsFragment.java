@@ -52,7 +52,7 @@ public class ChangeActionsFragment extends Fragment {
             mCallback = (OnActionClicked) activity;
         }
         catch (ClassCastException e){
-            throw new ClassCastException("Must Implement OnActionClicked");
+            throw new ClassCastException(getString(R.string.err_actionsfrag));
         }
     }
 
