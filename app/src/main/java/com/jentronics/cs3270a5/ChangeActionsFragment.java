@@ -27,6 +27,10 @@ public class ChangeActionsFragment extends Fragment {
     private int maxChangeCents = 10000;
     private Random random = new Random();
 
+    public void setChangeMax(double value) {
+        maxChangeCents = (int) (value * 100);
+    }
+
     interface OnActionClicked {
         void onReStart();
         void onNewAmount(double newAmount);
@@ -93,5 +97,9 @@ public class ChangeActionsFragment extends Fragment {
         int cents = random.nextInt(maxChangeCents);
         double newAmount = (double) cents/100.0;
         mCallback.onNewAmount(newAmount);
+    }
+
+    public String getmaxChangeCentsString(){
+        return (Double.toString( (double) maxChangeCents/100.0));
     }
 }

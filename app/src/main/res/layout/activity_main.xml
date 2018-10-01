@@ -33,12 +33,4 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <Button android:id="@+id/btn_show_fail"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/show_alert_test"/>
-    <Button android:id="@+id/btn_show_win"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/show_alert_test"/>
 </LinearLayout>

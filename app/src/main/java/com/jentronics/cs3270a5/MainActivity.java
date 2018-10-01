@@ -23,6 +23,8 @@ public class MainActivity extends AppCompatActivity
     private ChangeButtonsFragment buttonsFragment;
     private ChangeResultsFragment resultsFragment;
 
+    private Boolean mainView = true;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,13 +33,26 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        fm = getSupportFragmentManager();
+        showMainScreen();
+
+    }
+    public void showOptionScreen(){
+        if(fm==null) fm = getSupportFragmentManager();
+        fm.beginTransaction()
+              //  .hide(fm.findFragmentByTag("FragActions"))
+                //.hide(fm.findFragmentByTag("FragButton"))
+                .replace(R.id.fragment_change_result, new OptionsFragment(), "FragResults")
+                .addToBackStack(null)
+                .commit();
+    }
+
+    public void showMainScreen(){
+        if(fm==null) fm = getSupportFragmentManager();
         fm.beginTransaction()
                 .replace(R.id.fragment_change_action, new ChangeActionsFragment(), "FragActions")
                 .replace(R.id.fragment_change_buttons,new ChangeButtonsFragment(), "FragButtons")
                 .replace(R.id.fragment_change_result, new ChangeResultsFragment(), "FragResults")
                 .commit();
-
     }
 
     @Override
@@ -75,6 +90,7 @@ public class MainActivity extends AppCompatActivity
 
     private void action_set_max() {
         Toast.makeText(this, R.string.option_set_max_title, Toast.LENGTH_SHORT).show();
+        showOptionScreen();
     }
     private void action_zero_score() {
         actionsFragment.updateCorrectCount(0);
@@ -144,5 +160,16 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onLose() {
         restartGame();
+    }
+
+    @Override
+    public String getChangeMaxAsString(){
+        return actionsFragment.getmaxChangeCentsString();
+    }
+
+    @Override
+    public void setChangeMax(String value){
+        Log.d("Options", value);
+        actionsFragment.setChangeMax(Double.valueOf(value));
     }
 }
