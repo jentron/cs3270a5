@@ -43,11 +43,11 @@ public class ChangeResultsFragment extends Fragment {
     public void onResume(){
         super.onResume();
         tv_changeToMake = (TextView) root.findViewById(R.id.tv_changeToMake);
-        tv_changeToMake.setText(numFormat.format(changeToMake.doubleValue()));
+        if(tv_changeToMake != null) tv_changeToMake.setText(numFormat.format(changeToMake.doubleValue()));
         tv_changeSoFar = (TextView) root.findViewById(R.id.tv_totalSoFar);
-        tv_changeSoFar.setText(numFormat.format(changeSoFar.doubleValue()));
+        if(tv_changeSoFar != null) tv_changeSoFar.setText(numFormat.format(changeSoFar.doubleValue()));
         tv_timeRemain = (TextView) root.findViewById(R.id.tv_timeRemain);
-        tv_timeRemain.setText(timeRemaining);
+        if(tv_timeRemain != null) tv_timeRemain.setText(Integer.toString(timeRemaining));
     }
 
     public int addChange(BigDecimal change) {
