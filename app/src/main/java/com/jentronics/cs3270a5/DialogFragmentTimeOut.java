@@ -1,6 +1,7 @@
 package com.jentronics.cs3270a5;
 
 
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
 import android.app.Dialog;
@@ -18,6 +19,20 @@ import android.view.ViewGroup;
  * A simple {@link Fragment} subclass.
  */
 public class DialogFragmentTimeOut extends DialogFragment {
+    DialogFragmentInterface mCallback;
+
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+
+        try{
+            mCallback = (DialogFragmentInterface) activity;
+        }
+        catch (ClassCastException e){
+            throw new ClassCastException(getString(R.string.err_actionsfrag));
+        }
+    }
 
 
     public DialogFragmentTimeOut() {
@@ -34,6 +49,7 @@ public class DialogFragmentTimeOut extends DialogFragment {
                 .setPositiveButton(R.string.btn_ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
+                        mCallback.onLose();
                         Log.d("TODO","What happens after timeout?");
                     }
                 });

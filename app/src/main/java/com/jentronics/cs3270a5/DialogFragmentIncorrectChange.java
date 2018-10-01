@@ -1,6 +1,7 @@
 package com.jentronics.cs3270a5;
 
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -16,6 +17,20 @@ import android.util.Log;
  */
 public class DialogFragmentIncorrectChange extends DialogFragment {
 
+    DialogFragmentInterface mCallback;
+
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+
+        try{
+            mCallback = (DialogFragmentInterface) activity;
+        }
+        catch (ClassCastException e){
+            throw new ClassCastException(getString(R.string.err_actionsfrag));
+        }
+    }
 
     public DialogFragmentIncorrectChange() {
         // Required empty public constructor
@@ -31,6 +46,7 @@ public class DialogFragmentIncorrectChange extends DialogFragment {
                 .setPositiveButton(R.string.btn_ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
+                        mCallback.onLose();
                         Log.d("TODO","What happens after incorrect change?");
                     }
                 });
