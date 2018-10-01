@@ -70,10 +70,9 @@ public class ChangeResultsFragment extends Fragment {
     }
 
     public int addChange(BigDecimal change) {
-
+        Log.d("ChangeResults", change.toPlainString());
         changeSoFar = changeSoFar.add(change);
         if(tv_changeSoFar != null) tv_changeSoFar.setText(numFormat.format(changeSoFar.doubleValue()));
-
         return changeSoFar.compareTo(changeToMake); /* -1 less than, 0 equal, 1 over */
     }
 

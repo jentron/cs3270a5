@@ -1,6 +1,7 @@
 package com.jentronics.cs3270a5;
 
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -15,7 +16,23 @@ import android.widget.Button;
  */
 public class ChangeButtonsFragment extends Fragment {
     private View root;
+    private OnButtonsFragment mCallback;
 
+    interface OnButtonsFragment {
+        void onButtonClick(double amount);
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+
+        try{
+            mCallback = (OnButtonsFragment) activity;
+        }
+        catch (ClassCastException e){
+            throw new ClassCastException(getString(R.string.err_buttonsfrag));
+        }
+    }
     public ChangeButtonsFragment() {
         // Required empty public constructor
     }
@@ -90,6 +107,7 @@ public class ChangeButtonsFragment extends Fragment {
                     default:
                         amount = 0;
                 }
+                mCallback.onButtonClick(amount);
                 Log.d("button", String.valueOf(amount));
             }
         };

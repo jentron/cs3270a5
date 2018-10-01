@@ -4,6 +4,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,7 +15,10 @@ import java.math.BigDecimal;
 
 
 public class MainActivity extends AppCompatActivity
-        implements ChangeActionsFragment.OnActionClicked, ChangeResultsFragment.OnChangeResult {
+        implements ChangeActionsFragment.OnActionClicked,
+        ChangeResultsFragment.OnChangeResult,
+        ChangeButtonsFragment.OnButtonsFragment
+{
     private FragmentManager fm;
     private ChangeActionsFragment actionsFragment;
     private ChangeButtonsFragment buttonsFragment;
@@ -102,7 +106,6 @@ public class MainActivity extends AppCompatActivity
     public void onReStart() {
         resultsFragment.clearChange();
         resultsFragment.setTimeRemaining();
-        // todo reset the timer
     }
 
     @Override
@@ -115,5 +118,17 @@ public class MainActivity extends AppCompatActivity
         DialogFragmentTimeOut dialog = new DialogFragmentTimeOut();
         dialog.setCancelable(false);
         dialog.show(getSupportFragmentManager(), "timeoutDialog");
+    }
+
+    @Override
+    public void onButtonClick(double amount) {
+        int res = resultsFragment.addChange(new BigDecimal(amount));
+        if(res > 0 ) {
+            Log.d("ResultsFrag", "Too Big");
+        } else if (res == 0 ) {
+            Log.d("ResultsFrag", "Perfect");
+        } else {
+            Log.d("ResultsFrag", "Too Small");
+        }
     }
 }
