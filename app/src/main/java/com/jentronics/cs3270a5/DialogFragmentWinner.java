@@ -1,6 +1,7 @@
 package com.jentronics.cs3270a5;
 
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -15,8 +16,22 @@ import android.util.Log;
  * A simple {@link Fragment} subclass.
  */
 public class DialogFragmentWinner extends DialogFragment {
+    onDialogFragWinner mCallback;
 
+    public interface onDialogFragWinner {
+        void onWin();
+    }
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
 
+        try{
+            mCallback = (onDialogFragWinner) activity;
+        }
+        catch (ClassCastException e){
+            throw new ClassCastException(getString(R.string.err_actionsfrag));
+        }
+    }
     public DialogFragmentWinner() {
         // Required empty public constructor
     }
@@ -31,7 +46,9 @@ public class DialogFragmentWinner extends DialogFragment {
                 .setPositiveButton(R.string.btn_ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
+                        ;
                         Log.d("TODO","What happens after win?");
+                        mCallback.onWin();
                     }
                 });
 

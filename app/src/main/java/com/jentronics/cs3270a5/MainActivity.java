@@ -1,5 +1,6 @@
 package com.jentronics.cs3270a5;
 
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -17,7 +18,8 @@ import java.math.BigDecimal;
 public class MainActivity extends AppCompatActivity
         implements ChangeActionsFragment.OnActionClicked,
         ChangeResultsFragment.OnChangeResult,
-        ChangeButtonsFragment.OnButtonsFragment
+        ChangeButtonsFragment.OnButtonsFragment,
+        DialogFragmentWinner.onDialogFragWinner
 {
     private FragmentManager fm;
     private ChangeActionsFragment actionsFragment;
@@ -102,6 +104,14 @@ public class MainActivity extends AppCompatActivity
         Toast.makeText(this, R.string.option_zero_score_title, Toast.LENGTH_SHORT).show();
     }
 
+    public void startNewGame(){
+        // start another game
+        actionsFragment.updateCorrectCount();
+        actionsFragment.createNewAmount();
+        resultsFragment.clearChange();
+        resultsFragment.setTimeRemaining();
+    }
+
     @Override
     public void onReStart() {
         resultsFragment.clearChange();
@@ -129,7 +139,15 @@ public class MainActivity extends AppCompatActivity
             Log.d("ResultsFrag", "Too Small");
         } else {
             Log.d("ResultsFrag", "Perfect");
-            actionsFragment.updateCorrectCount();
+            DialogFragmentWinner dialog = new DialogFragmentWinner();
+            dialog.setCancelable(false);
+            dialog.show(getSupportFragmentManager(), "winDialog");
+
         }
+    }
+
+    @Override
+    public void onWin() {
+        startNewGame();
     }
 }
