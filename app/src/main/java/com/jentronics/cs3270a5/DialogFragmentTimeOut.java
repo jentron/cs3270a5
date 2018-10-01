@@ -17,10 +17,10 @@ import android.view.ViewGroup;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class TimeOutDialogFragment extends DialogFragment {
+public class DialogFragmentTimeOut extends DialogFragment {
 
 
-    public TimeOutDialogFragment() {
+    public DialogFragmentTimeOut() {
         // Required empty public constructor
     }
 

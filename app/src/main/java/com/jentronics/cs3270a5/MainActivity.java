@@ -20,13 +20,31 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        Button btnShow = (Button) findViewById(R.id.btn_test);
-        btnShow.setOnClickListener(new View.OnClickListener() {
+        Button btnShowTimeOut = (Button) findViewById(R.id.btn_show_time_out);
+        btnShowTimeOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                TimeOutDialogFragment dialog = new TimeOutDialogFragment();
+                DialogFragmentTimeOut dialog = new DialogFragmentTimeOut();
                 dialog.setCancelable(false);
                 dialog.show(getSupportFragmentManager(), "timeoutDialog");
+            }
+        });
+        Button btnShowFail = (Button) findViewById(R.id.btn_show_fail);
+        btnShowFail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DialogFragmentIncorrectChange dialog = new DialogFragmentIncorrectChange();
+                dialog.setCancelable(false);
+                dialog.show(getSupportFragmentManager(), "failDialog");
+            }
+        });
+        Button btnShowWinner = (Button) findViewById(R.id.btn_show_win);
+        btnShowWinner.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DialogFragmentWinner dialog = new DialogFragmentWinner();
+                dialog.setCancelable(false);
+                dialog.show(getSupportFragmentManager(), "winDialog");
             }
         });
 
