@@ -19,20 +19,17 @@
         android:elevation="4dp"
         />
 
-    <fragment
+    <FrameLayout
         android:id="@+id/fragment_change_result"
-        android:name="com.jentronics.cs3270a5.ChangeResultsFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
-    <fragment
+    <FrameLayout
         android:id="@+id/fragment_change_buttons"
-        android:name="com.jentronics.cs3270a5.ChangeButtonsFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <fragment
+    <FrameLayout
         android:id="@+id/fragment_change_action"
-        android:name="com.jentronics.cs3270a5.ChangeActionsFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 

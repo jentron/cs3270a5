@@ -1,5 +1,6 @@
 package com.jentronics.cs3270a5;
 
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -11,6 +12,10 @@ import android.widget.Toast;
 
 
 public class MainActivity extends AppCompatActivity implements ChangeActionsFragment.OnActionClicked {
+    private FragmentManager fm;
+    private ChangeActionsFragment actionsFragment;
+    private ChangeButtonsFragment buttonsFragment;
+    private ChangeResultsFragment resultsFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,6 +24,14 @@ public class MainActivity extends AppCompatActivity implements ChangeActionsFrag
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        fm = getSupportFragmentManager();
+        fm.beginTransaction()
+                .replace(R.id.fragment_change_action, new ChangeActionsFragment(), "FragActions")
+                .replace(R.id.fragment_change_buttons,new ChangeButtonsFragment(), "FragButtons")
+                .replace(R.id.fragment_change_result, new ChangeResultsFragment(), "FragResults")
+                .commit();
+
 
         Button btnShowTimeOut = (Button) findViewById(R.id.btn_show_time_out);
         btnShowTimeOut.setOnClickListener(new View.OnClickListener() {
@@ -71,6 +84,14 @@ public class MainActivity extends AppCompatActivity implements ChangeActionsFrag
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        actionsFragment = (ChangeActionsFragment) fm.findFragmentByTag("FragActions");
+        buttonsFragment = (ChangeButtonsFragment) fm.findFragmentByTag("FragButtons");
+        resultsFragment = (ChangeResultsFragment) fm.findFragmentByTag("FragResults");
     }
 
     private void action_set_max() {
