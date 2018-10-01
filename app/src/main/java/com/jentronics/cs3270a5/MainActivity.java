@@ -36,13 +36,6 @@ public class MainActivity extends AppCompatActivity
                 .commit();
 
 
-        Button btnShowTimeOut = (Button) findViewById(R.id.btn_show_time_out);
-        btnShowTimeOut.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
         Button btnShowFail = (Button) findViewById(R.id.btn_show_fail);
         btnShowFail.setOnClickListener(new View.OnClickListener() {
             @Override
