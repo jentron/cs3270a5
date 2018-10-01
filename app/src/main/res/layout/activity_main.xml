@@ -25,15 +25,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
     <fragment
-        android:id="@+id/fragment_change_buttions"
+        android:id="@+id/fragment_change_buttons"
         android:name="com.jentronics.cs3270a5.ChangeButtonsFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+
     <fragment
         android:id="@+id/fragment_change_action"
         android:name="com.jentronics.cs3270a5.ChangeActionsFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+
     <Button android:id="@+id/btn_show_time_out"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
