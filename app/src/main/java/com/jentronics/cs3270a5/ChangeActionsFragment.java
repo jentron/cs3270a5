@@ -21,7 +21,7 @@ import java.util.Random;
 public class ChangeActionsFragment extends Fragment {
     private View root;
     private TextView tv_correct; //tv_correct_change
-    private int correct = 5;
+    private int correct = 0;
     private OnActionClicked mCallback;
 
     private int maxChangeCents = 10000;

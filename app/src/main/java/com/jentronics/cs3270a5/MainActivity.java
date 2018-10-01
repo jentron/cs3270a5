@@ -84,10 +84,16 @@ public class MainActivity extends AppCompatActivity
     public void startNewGame(){
         // start another game
         resultsFragment.stopGameTimer();
-        actionsFragment.updateCorrectCount();
         actionsFragment.createNewAmount();
         resultsFragment.clearChange();
         resultsFragment.startGameTimer();
+    }
+
+    public void restartGame(){
+        resultsFragment.stopGameTimer();
+        resultsFragment.clearChange();
+        resultsFragment.startGameTimer();
+
     }
 
     @Override
@@ -131,11 +137,12 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onWin() {
+        actionsFragment.updateCorrectCount();
         startNewGame();
     }
 
     @Override
     public void onLose() {
-        startNewGame();
+        restartGame();
     }
 }
