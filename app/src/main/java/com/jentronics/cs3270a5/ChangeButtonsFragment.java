@@ -10,6 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import java.math.BigDecimal;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -19,7 +21,7 @@ public class ChangeButtonsFragment extends Fragment {
     private OnButtonsFragment mCallback;
 
     interface OnButtonsFragment {
-        void onButtonClick(double amount);
+        void onButtonClick(BigDecimal amount);
     }
 
     @Override
@@ -63,49 +65,49 @@ public class ChangeButtonsFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 int myBtn = view.getId();
-                double amount = 0.0;
+                BigDecimal amount = BigDecimal.ZERO;
                 switch(myBtn) {
                     case R.id.button1cents:
-                        amount = 0.01;
+                        amount = amount.add(new BigDecimal("0.01"));
                         break;
 
                     case R.id.button5cents:
-                        amount = 0.05;
+                        amount = amount.add(new BigDecimal("0.05"));
                         break;
 
                     case R.id.button10cents:
-                        amount = 0.10;
+                        amount = amount.add(new BigDecimal("0.10"));
                         break;
 
                     case R.id.button25cents:
-                        amount = 0.25;
+                        amount = amount.add(new BigDecimal("0.25"));
                         break;
 
                     case R.id.button50cents:
-                        amount = 0.50;
+                        amount = amount.add(new BigDecimal("0.50"));
                         break;
 
                     case R.id.button1dollars:
-                        amount = 1.00;
+                        amount = amount.add(new BigDecimal("1.00"));
                         break;
 
                     case R.id.button5dollars:
-                        amount = 5.00;
+                        amount = amount.add(new BigDecimal("5.00"));
                         break;
 
                     case R.id.button10dollars:
-                        amount = 10.00;
+                        amount = amount.add(new BigDecimal("10.00"));
                         break;
 
                     case R.id.button20dollars:
-                        amount = 20.00;
+                        amount = amount.add(new BigDecimal("20.00"));
                         break;
 
                     case R.id.button50dollars:
-                        amount = 50.00;
+                        amount = amount.add(new BigDecimal("50.00"));
                         break;
                     default:
-                        amount = 0;
+                        amount = amount.add(new BigDecimal("0"));
                 }
                 mCallback.onButtonClick(amount);
                 Log.d("button", String.valueOf(amount));

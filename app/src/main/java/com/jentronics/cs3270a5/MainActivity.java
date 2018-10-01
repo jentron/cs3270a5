@@ -110,7 +110,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onNewAmount(double newAmount) {
-        resultsFragment.setChangeToMake(new BigDecimal(newAmount));
+        resultsFragment.setChangeToMake( BigDecimal.valueOf(newAmount));
     }
 
     @Override
@@ -121,14 +121,15 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void onButtonClick(double amount) {
-        int res = resultsFragment.addChange(new BigDecimal(amount));
+    public void onButtonClick(BigDecimal amount) {
+        int res = resultsFragment.addChange(amount);
         if(res > 0 ) {
             Log.d("ResultsFrag", "Too Big");
-        } else if (res == 0 ) {
-            Log.d("ResultsFrag", "Perfect");
-        } else {
+        } else if (res < 0 ) {
             Log.d("ResultsFrag", "Too Small");
+        } else {
+            Log.d("ResultsFrag", "Perfect");
+            actionsFragment.updateCorrectCount();
         }
     }
 }
