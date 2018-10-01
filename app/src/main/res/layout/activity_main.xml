@@ -34,5 +34,8 @@
         android:name="com.jentronics.cs3270a5.ChangeActionsFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
-
+    <Button android:id="@+id/btn_test"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/show_alert_test"/>
 </LinearLayout>
