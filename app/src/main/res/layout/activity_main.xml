@@ -6,7 +6,20 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".MainActivity">
-   <fragment
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:titleTextColor="@android:color/white"
+        android:elevation="4dp"
+        />
+
+    <fragment
         android:id="@+id/fragment_change_result"
         android:name="com.jentronics.cs3270a5.ChangeResultsFragment"
         android:layout_width="match_parent"

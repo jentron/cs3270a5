@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/action_zero_score"
+        android:icon="@drawable/ic_local_atm_white_24dp"
+        android:title="@string/option_zero_score_title"
+        app:showAsAction="always|withText"/>
+    <item
+        android:id="@+id/action_set_max"
+        android:title="@string/option_set_max_title"
+        app:showAsAction="never"/>
+</menu>
