@@ -10,7 +10,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements ChangeActionsFragment.OnActionClicked {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,5 +78,15 @@ public class MainActivity extends AppCompatActivity {
     }
     private void action_zero_score() {
         Toast.makeText(this, R.string.option_zero_score_title, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onReStart() {
+
+    }
+
+    @Override
+    public void onNewAmount() {
+
     }
 }
