@@ -12,6 +12,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.Random;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -19,12 +21,15 @@ import android.widget.TextView;
 public class ChangeActionsFragment extends Fragment {
     private View root;
     private TextView tv_correct; //tv_correct_change
-    private int correct = 0;
+    private int correct = 5;
     private OnActionClicked mCallback;
+
+    private int maxChangeCents = 10000;
+    private Random random = new Random();
 
     interface OnActionClicked {
         void onReStart();
-        void onNewAmount();
+        void onNewAmount(double newAmount);
     }
 
     public ChangeActionsFragment() {
@@ -69,7 +74,9 @@ public class ChangeActionsFragment extends Fragment {
         btnNewAmount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mCallback.onNewAmount();
+                int cents = random.nextInt(maxChangeCents);
+                double newAmount = (double) cents/100.0;
+                mCallback.onNewAmount(newAmount);
                 Log.d("Buttons", "clicked btn_NewAmount");
             }
         });

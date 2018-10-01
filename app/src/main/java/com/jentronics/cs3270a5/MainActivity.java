@@ -10,6 +10,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import java.math.BigDecimal;
+
 
 public class MainActivity extends AppCompatActivity implements ChangeActionsFragment.OnActionClicked {
     private FragmentManager fm;
@@ -98,16 +100,18 @@ public class MainActivity extends AppCompatActivity implements ChangeActionsFrag
         Toast.makeText(this, R.string.option_set_max_title, Toast.LENGTH_SHORT).show();
     }
     private void action_zero_score() {
+        actionsFragment.updateCorrectCount(0);
         Toast.makeText(this, R.string.option_zero_score_title, Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onReStart() {
-
+        resultsFragment.clearChange();
+        // todo reset the timer
     }
 
     @Override
-    public void onNewAmount() {
-
+    public void onNewAmount(double newAmount) {
+        resultsFragment.setChangeToMake(new BigDecimal(newAmount));
     }
 }
